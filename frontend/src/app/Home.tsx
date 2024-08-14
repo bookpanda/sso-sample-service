@@ -1,5 +1,6 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { logout } from "../api/auth";
+import { Button } from "../components/Button";
 import { BG_COLOR, SERVICE, SSO_URL, WEB_URL } from "../constant/constant";
 import { useAuthSSO } from "../hooks/useAuthSSO";
 
@@ -43,23 +44,11 @@ function Home() {
         <>
           <h3 className="mt-4 text-2xl font-medium">Logged in as</h3>
           <p className="mt-1">{credentials.email}</p>
-          <button
-            onClick={handleLogout}
-            className="mt-8 flex w-[80%] items-center justify-center rounded-lg border border-gray-300 py-2 text-lg text-gray-600 duration-300 ease-in-out hover:bg-slate-100"
-          >
-            <h3>Logout</h3>
-          </button>
+          <Button onClick={handleLogout}>Logout</Button>
         </>
       );
 
-    return (
-      <button
-        onClick={handleClick}
-        className="mt-8 flex w-[80%] items-center justify-center rounded-lg border border-gray-300 py-2 text-lg text-gray-600 duration-300 ease-in-out hover:bg-slate-100"
-      >
-        <h3>Login via SSO</h3>
-      </button>
-    );
+    return <Button onClick={handleClick}>Login via SSO</Button>;
   };
 
   return (
@@ -67,7 +56,7 @@ function Home() {
       style={{ backgroundColor: BG_COLOR }}
       className="flex h-screen w-screen items-center justify-center"
     >
-      <div className="flex h-[40vh] w-[60vw] flex-col items-center rounded-xl bg-white px-8 py-[10vh] drop-shadow-xl md:w-[40vw] xl:w-[30vw] 2xl:w-[20vw]">
+      <div className="flex h-[40vh] w-[60vw] flex-col items-center justify-center rounded-xl bg-white px-8 py-[10vh] drop-shadow-xl md:w-[40vw] xl:w-[30vw] 2xl:w-[20vw]">
         <h1 className="text-4xl font-bold">{SERVICE}</h1>
         {SSOLoginStatus()}
 
