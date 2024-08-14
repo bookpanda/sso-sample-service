@@ -1,1 +1,1 @@
-# sso-sample-service
+# SSO: Sample Service

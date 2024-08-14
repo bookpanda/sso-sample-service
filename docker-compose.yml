@@ -1,0 +1,54 @@
+version: "3.9"
+
+services:
+  cas_db:
+    image: postgres:15.1-alpine3.17
+    container_name: cas_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: "1234"
+      POSTGRES_DB: db
+    networks:
+      - cas
+    volumes:
+      - cas_postgres:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  service_db:
+    image: postgres:15.1-alpine3.17
+    container_name: service_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: "1234"
+      POSTGRES_DB: db
+    networks:
+      - service
+    volumes:
+      - service_postgres:/var/lib/postgresql/data
+    ports:
+      - "5433:5432"
+  
+  service_cache:
+    image: redis
+    container_name: service_cache
+    restart: unless-stopped
+    environment:
+      REDIS_HOST: localhost
+      REDIS_PASSWORD: "5678"
+    networks:
+      - service
+    ports:
+      - "6379:6379"
+
+networks:
+  cas:
+    name: cas
+  service:
+    name: service
+
+volumes:
+  cas_postgres:
+  service_postgres:
