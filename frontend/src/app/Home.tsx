@@ -7,7 +7,7 @@ function Home() {
   const location = useLocation();
   const navigate = useNavigate();
   const queryParams = new URLSearchParams(location.search);
-  const serviceTicket = queryParams.get("ticket") || "";
+  const serviceTicket = queryParams.get("ticket") ?? "";
 
   const { setAuthToken, authToken, credentials, loading, error } =
     useAuthSSO(serviceTicket);
