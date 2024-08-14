@@ -37,8 +37,6 @@ public class AuthController : ControllerBase
             var session = await response.Content.ReadFromJsonAsync<SessionCAS>();
             if (session == null) return Unauthorized("Invalid session");
 
-            _log.LogInformation($"ASSsession: {session.Email}, {session.UserID}, {session.Role}");
-
             var authToken = await _authSvc.AuthenticateSSO(session);
 
             return Ok(authToken);
