@@ -28,7 +28,6 @@ public class JwtService : IJwtService
     {
         try
         {
-            _log.LogInformation($"JWTASS {session.Email}, {session.Role}");
             var claims = new List<Claim>
             {
                 new Claim("userID", user.ID ?? throw new InvalidOperationException("User Name is missing")),
