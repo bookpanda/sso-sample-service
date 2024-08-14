@@ -1,6 +1,6 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { logout } from "../api/auth";
-import { SERVICE, SSO_URL, WEB_URL } from "../constant/constant";
+import { BG_COLOR, SERVICE, SSO_URL, WEB_URL } from "../constant/constant";
 import { useAuthSSO } from "../hooks/useAuthSSO";
 
 function Home() {
@@ -63,7 +63,10 @@ function Home() {
   };
 
   return (
-    <div className="flex h-screen w-screen items-center justify-center bg-blue-100">
+    <div
+      style={{ backgroundColor: BG_COLOR }}
+      className="flex h-screen w-screen items-center justify-center"
+    >
       <div className="flex h-[40vh] w-[60vw] flex-col items-center rounded-xl bg-white px-8 py-[10vh] drop-shadow-xl md:w-[40vw] xl:w-[30vw] 2xl:w-[20vw]">
         <h1 className="text-4xl font-bold">{SERVICE}</h1>
         {SSOLoginStatus()}
