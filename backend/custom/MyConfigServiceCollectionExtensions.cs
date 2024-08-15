@@ -29,7 +29,8 @@ public static class MyConfigServiceCollectionExtensions
                     builder.WithOrigins(corsOrigins)
                            .AllowAnyHeader()
                            .AllowAnyMethod()
-                           .AllowCredentials();
+                           .AllowCredentials()
+                           .SetPreflightMaxAge(TimeSpan.FromMinutes(5));
                 });
         });
 
