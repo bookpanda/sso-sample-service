@@ -33,7 +33,7 @@ builder.Services
 
 var corsOriginsString = builder.Configuration.GetSection("Cors:AllowedOrigins").Get<string>() ?? "";
 var corsOrigins = corsOriginsString.Split(',');
-Console.WriteLine($"Allowed origins: {corsOrigins.ToString}");
+Console.WriteLine($"Allowed origins: {corsOrigins[0]}");
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowSpecificOrigins",
@@ -42,6 +42,7 @@ builder.Services.AddCors(options =>
             builder.WithOrigins(corsOrigins)
                    .AllowAnyHeader()
                    .AllowAnyMethod()
+                   .SetIsOriginAllowed((host) => true)
                    .AllowCredentials();
         });
 });
