@@ -28,8 +28,23 @@ builder.Services.AddSwaggerGen();
 
 builder.Services
     .AddConfig(builder.Configuration)
-    .AddCustomCors(builder.Configuration)
     .AddMyDependencyGroup();
+// .AddCustomCors(builder.Configuration)
+
+var corsOriginsString = builder.Configuration.GetSection("Cors:AllowedOrigins").Get<string>() ?? "";
+var corsOrigins = corsOriginsString.Split(',');
+Console.WriteLine($"Allowed origins: {corsOrigins.ToString}");
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowSpecificOrigins",
+        builder =>
+        {
+            builder.WithOrigins(corsOrigins)
+                   .AllowAnyHeader()
+                   .AllowAnyMethod()
+                   .AllowCredentials();
+        });
+});
 
 var app = builder.Build();
 
