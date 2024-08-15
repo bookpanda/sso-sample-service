@@ -31,16 +31,16 @@ builder.Services
     .AddMyDependencyGroup();
 // .AddCustomCors(builder.Configuration)
 
+var corsPolicy = "CorsPolicy";
 var corsOriginsString = builder.Configuration.GetSection("Cors:AllowedOrigins").Get<string>() ?? "";
 var corsOrigins = corsOriginsString.Split(',');
 Console.WriteLine($"Allowed origins: {corsOrigins[0]}");
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowSpecificOrigins",
+    options.AddPolicy(corsPolicy,
         builder =>
         {
-            builder.WithOrigins(corsOrigins)
-                   .AllowAnyHeader()
+            builder.AllowAnyHeader()
                    .AllowAnyMethod()
                    .SetIsOriginAllowed((host) => true)
                    .AllowCredentials();
@@ -74,7 +74,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseRouting();
-app.UseCors("AllowSpecificOrigins");
+app.UseCors(corsPolicy);
 app.UseAuthorization();
 
 app.MapHealthChecks("/healthz");
