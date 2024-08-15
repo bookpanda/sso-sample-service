@@ -32,7 +32,11 @@ public class AuthController : ControllerBase
         try
         {
             var response = await _httpClient.GetAsync(_config.Authority + "/api/v1/auth/validate-st?ticket=" + ticket + "&service=" + _config.Service);
-            if (!response.IsSuccessStatusCode) return Unauthorized("Invalid ticket");
+            if (!response.IsSuccessStatusCode)
+            {
+                _log.LogError(response.ReasonPhrase, "Error querying CAS ValidateST");
+                return Unauthorized("Invalid ticket");
+            }
 
             var session = await response.Content.ReadFromJsonAsync<SessionCAS>();
             if (session == null) return Unauthorized("Invalid session");
