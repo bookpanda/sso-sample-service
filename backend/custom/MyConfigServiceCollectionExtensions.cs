@@ -30,7 +30,7 @@ public static class MyConfigServiceCollectionExtensions
                            .AllowAnyHeader()
                            .AllowAnyMethod()
                            .AllowCredentials()
-                           .SetPreflightMaxAge(TimeSpan.FromMinutes(5));
+                           .SetPreflightMaxAge(TimeSpan.FromDays(1));
                 });
         });
 
