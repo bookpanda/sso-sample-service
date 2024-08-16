@@ -60,19 +60,31 @@ If the user is already logged in to CAS, the user can access the service without
 -   [Sample service](https://github.com/bookpanda/sso-sample-service)
 
 ### Stack
--   golang
+-   ASP.NET Core
 -   postgresql
+-   redis
 -   react
 
 ### Prerequisites
 -   💻
--   golang 1.22 or [later](https://go.dev)
+-   Microsoft.NETCore.App 8.0.4 runtime or [later](https://dotnet.microsoft.com/en-us/download)
+-   Node v20.9.0 or [later](https://nodejs.org/en) (recommend using nvm)
+-   pnpm v9.5.0 or [later](https://pnpm.io)
 -   docker
 -   makefile
--   [Go Air](https://github.com/air-verse/air)
 
-### Installation + Running
-1. Clone this repo
-2. Run `go mod download` to download all the dependencies.
-3. Copy `.env.template` and paste it in the same directory as `.env`. Fill in the appropriate values for both `frontend` and `backend`.
-4. Run `air` in `backend` and `pnpm dev` in `frontend`.
+### Backend Setup
+1. Go to `backend` directory.
+2. Run `dotnet restore` to download all the dependencies.
+3. Copy `.env.template` and paste it in the same directory as `.env`. Fill in the appropriate values.
+4. Run `dotnet watch`.
+
+### Frontend Setup
+1. Go to `frontend` directory.
+2. Run `pnpm i` to download all the dependencies.
+3. Copy `.env.template` and paste it in the same directory as `.env`. Fill in the appropriate values.
+4. Run `pnpm dev`.
+
+### Running the whole backend stack
+1. Run `make docker-qa` in the root directory to spin up databases, redis, CAS and service 1 + 2 APIs.
+2. Run frontend services by running `pnpm dev` in `frontend` directory in [CAS](https://github.com/bookpanda/sso-cas) and [Sample service](https://github.com/bookpanda/sso-sample-service) repos. For service 2, just copy another [Sample service](https://github.com/bookpanda/sso-sample-service) and change `.env` and `port`.
