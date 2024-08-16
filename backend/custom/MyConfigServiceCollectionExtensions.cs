@@ -26,7 +26,7 @@ public static class MyConfigServiceCollectionExtensions
             options.AddPolicy("AllowSpecificOrigins",
                 builder =>
                 {
-                    builder.WithOrigins(corsOriginsString)
+                    builder.WithOrigins(corsOrigins)
                            .AllowAnyHeader()
                            .AllowAnyMethod()
                            .AllowCredentials()
