@@ -8,7 +8,6 @@ using Microsoft.Extensions.Options;
 namespace backend.Controllers;
 
 [Route("auth")]
-[ServiceFilter(typeof(PreflightRequestFilter))]
 [ApiController]
 public class AuthController : ControllerBase
 {
