@@ -49,6 +49,7 @@ public static class MyConfigServiceCollectionExtensions
         services.AddScoped<IUserService, UserService>();
 
         services.AddScoped<HttpClient>();
+        services.AddScoped<PreflightRequestFilter>();
 
         return services;
     }
