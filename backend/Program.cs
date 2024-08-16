@@ -21,7 +21,11 @@ builder.Services.AddStackExchangeRedisCache(opt =>
     opt.Configuration = redisConnString;
 });
 
-builder.Services.AddControllers(opt => opt.Conventions.Insert(0, new GlobalRoutePrefixConvention("api/v1")));
+builder.Services.AddControllers(opt =>
+{
+    opt.Conventions.Insert(0, new GlobalRoutePrefixConvention("api/v1"));
+    opt.Filters.Add<PreflightRequestFilter>();
+});
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddHealthChecks();
 builder.Services.AddSwaggerGen();
